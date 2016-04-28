@@ -16,8 +16,7 @@ public class Movement : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        transform.position += transform.forward * 5 * Time.deltaTime;
-        //transform.Rotate(new Vector3(0, 50, 0) * Time.deltaTime);
+        transform.position += transform.forward * 3 * Time.deltaTime;
         
     }
 }

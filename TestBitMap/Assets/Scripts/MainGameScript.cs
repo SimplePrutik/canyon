@@ -11,7 +11,7 @@ public class MainGameScript : MonoBehaviour {
         //точка отсчета
         Vector3 PointStart = new Vector3(0, 0, 0);
         //Debug.Log(System.IO.Directory.GetCurrentDirectory());
-        System.Drawing.Bitmap image = new System.Drawing.Bitmap("Assets/Images/Map1.png", true);
+        System.Drawing.Bitmap image = new System.Drawing.Bitmap("Assets/Images/Map2.bmp", true);
 
 
 

@@ -17,7 +17,7 @@ public class p4 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(Example());
+        StartCoroutine(Example1());
     }
 
 
@@ -27,7 +27,16 @@ public class p4 : MonoBehaviour
         WWW www = new WWW("http://stud.mmcs.sfedu.ru/~alexandra/Map.png");
         yield return www;
         Rect rec = new Rect(0, 0, www.texture.width, www.texture.height);
-        img.overrideSprite = Sprite.Create(www.texture, rec, new Vector2(0, 0), 0.1f);
+        img.sprite = Sprite.Create(www.texture, rec, new Vector2(0, 0), 0.1f);
+    }
+
+    IEnumerator Example1()
+    {
+        // WWW www = new WWW("http://stud.mmcs.sfedu.ru/~alexandra/Map.png");
+        WWW www = new WWW("http://stud.mmcs.sfedu.ru/~alexandra/Map.png");
+        yield return www;
+        Rect rec = new Rect(0, 0, www.texture.width, www.texture.height);
+        img.sprite = Sprite.Create(www.texture, rec, new Vector2(0, 0), 0.1f);
     }
 
 }

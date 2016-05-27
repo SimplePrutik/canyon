@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class p2 : MonoBehaviour
+public class p3 : MonoBehaviour
 {
     public Image img;
     public Sprite Target;
@@ -10,12 +10,12 @@ public class p2 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        img.overrideSprite = Target;
+        img.sprite = Target;
     }
 
     // Update is called once per frame
     void Update()
     {
-        img.overrideSprite = Target;
+        img.sprite = Target;
     }
 }

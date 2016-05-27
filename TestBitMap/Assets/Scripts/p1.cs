@@ -14,6 +14,7 @@ public class p1 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        img.overrideSprite = Target;
+
+    }
 }

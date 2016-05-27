@@ -4,6 +4,8 @@ using System.Collections;
 
 public class MainGameScript : MonoBehaviour {
 
+    public UnityEngine.UI.InputField SX;
+    public UnityEngine.UI.InputField SY;
     public GameObject Block;
     public GameObject QuitBlock;
     public UnityEngine.UI.Image imgg;
@@ -113,6 +115,7 @@ public class MainGameScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         GenMap();
+		Instantiate (Resources.Load ("Car"), new Vector3 (System.Convert.ToInt32(SX.text), System.Convert.ToInt32(SY.text), 0), Quaternion.identity);
 	}
 	
 	// Update is called once per frame

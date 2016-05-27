@@ -23,10 +23,11 @@ public class p4 : MonoBehaviour
 
     IEnumerator Example()
     {
-        WWW www = new WWW("http://radikal.ru/content/images/My_Video_Apps.png");
+        // WWW www = new WWW("http://stud.mmcs.sfedu.ru/~alexandra/Map.png");
+        WWW www = new WWW("http://stud.mmcs.sfedu.ru/~alexandra/Map.png");
         yield return www;
         Rect rec = new Rect(0, 0, www.texture.width, www.texture.height);
-        img.overrideSprite = Sprite.Create(www.texture, rec, new Vector2(0, 0), .01f);
+        img.overrideSprite = Sprite.Create(www.texture, rec, new Vector2(0, 0), 0.1f);
     }
 
 }

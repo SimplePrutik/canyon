@@ -9,9 +9,11 @@ public class Car_and_rame : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		//if (other.name == "MapQuit") {
-		//	
-		//}
+		if (other.name == "MapQuit") {
+			//Debug.Log ("kkk");
+			var ps = GameObject.Find("Panel");
+			ps.SetActive;
+		}
 	}
 
 	// Update is called once per frame

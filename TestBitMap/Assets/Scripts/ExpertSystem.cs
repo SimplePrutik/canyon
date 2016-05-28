@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class ExpertSystem : MonoBehaviour {
 
+    public float sp;
+    public float l_s;
+    public float m_s;
+    public float r_s;
+
     public class Function
     {
         public float bottom_left;
@@ -220,8 +225,6 @@ public class ExpertSystem : MonoBehaviour {
 
     void Update()
     {
-        float sp = 0, l_s = 0, m_s = 0, r_s = 0;
-
         Speed speed = GetComponent<Speed>();
         List<Function> speed_list = new List<Function>(3);
         speed_list[0] = new Function(speed.z1, speed.z2, speed.z3, speed.z4);
@@ -293,7 +296,8 @@ public class ExpertSystem : MonoBehaviour {
                             }
                         }
                     }
-
+        this.transform.position += this.transform.forward + this.transform.forward * centerS;
+        this.transform.Rotate(new Vector3(0, 0, centerR));
     }
 }
     

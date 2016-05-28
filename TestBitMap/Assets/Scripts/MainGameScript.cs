@@ -4,10 +4,10 @@ using System.Collections;
 
 public class MainGameScript : MonoBehaviour {
 
-    public UnityEngine.UI.InputField SX;
-    public UnityEngine.UI.InputField SY;
     public GameObject Block;
     public GameObject QuitBlock;
+    public UnityEngine.UI.InputField SX;
+    public UnityEngine.UI.InputField SY;
     public UnityEngine.UI.Image imgg;
     const int maxWidth = 182;
     const int maxHeight = 102;
@@ -103,7 +103,7 @@ public class MainGameScript : MonoBehaviour {
 
                 if (color == Color.black)
                 {
-                    PointStart = new Vector3(X, Y, 0);
+                    PointStart = new Vector3(X, Y , 0);
                     MapArea[X, newText.height - Y - 1] = (GameObject)Instantiate(Block, PointStart, Quaternion.identity);
                 }
 
@@ -115,7 +115,7 @@ public class MainGameScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         GenMap();
-		Instantiate (Resources.Load ("Car"), new Vector3 (System.Convert.ToInt32(SX.text), System.Convert.ToInt32(SY.text), 0), Quaternion.identity);
+        Instantiate(Resources.Load("Car"), new Vector3(System.Convert.ToInt32(SX.text), System.Convert.ToInt32(SY.text), 0), Quaternion.identity);
 	}
 	
 	// Update is called once per frame

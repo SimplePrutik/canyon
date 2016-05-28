@@ -33,7 +33,7 @@ public class ExpertSystem : MonoBehaviour {
         }
     }
 
-    private float SpeedSqauare(int i, float k)
+    private float SpeedSquare(int i, float k)
     {
         switch (i)
         {
@@ -73,7 +73,7 @@ public class ExpertSystem : MonoBehaviour {
         return ((topside + (bottomside - topside) * (1 - k)) + bottomside) * k;
     }
 
-    private float RotateSqauare(int i, float k)
+    private float RotationSquare(int i, float k)
     {
         switch (i)
         {
@@ -158,7 +158,7 @@ public class ExpertSystem : MonoBehaviour {
         return bottomside / 2 + (2 * topside + bottomside) * (leftside - rightside) / (6 * (bottomside * bottomside - topside * topside));
     }
 
-    private float RotateCenter(int i, float k)
+    private float RotationCenter(int i, float k)
     {
         switch (i)
         {
@@ -204,6 +204,20 @@ public class ExpertSystem : MonoBehaviour {
         return bottomside / 2 + (2 * topside + bottomside) * (leftside - rightside) / (6 * (bottomside * bottomside - topside * topside));
     }
 
+    private float Min(List<float> l)
+    {
+        float min;
+        if (l[0] < l[1])
+            min = l[0];
+        else
+            min = l[1];
+        if (min > l[2])
+            min = l[2];
+        if (min > l[3])
+            min = l[3];
+        return min;
+    }
+
     void Update()
     {
         float sp = 0, l_s = 0, m_s = 0, r_s = 0;
@@ -232,7 +246,7 @@ public class ExpertSystem : MonoBehaviour {
         rs_list[1] = new Function(rs.o1, rs.o2, rs.o3, rs.o4);
         rs_list[2] = new Function(rs.t1, rs.t2, rs.t3, rs.t4);
 
-        float center = 0, mass = 0;
+        float massS = 0, centerS = 0, massR = 0, centerR = 0;
 
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j)
@@ -244,13 +258,42 @@ public class ExpertSystem : MonoBehaviour {
                         li[1] = ls_list[j].ComputeFunc(l_s);
                         li[2] = ms_list[k].ComputeFunc(m_s);
                         li[3] = rs_list[l].ComputeFunc(r_s);
-                        float m = SpeedSqauare(i, speed_list[i].ComputeFunc(sp));
-                        float c = SpeedCenter(i, speed_list[i].ComputeFunc(sp));
-                        if (mass == 0)
-                            ;
-
+                        float min = Min(li);
+                        if (min != 0)
+                        {
+                            float mass_speed = SpeedSquare(i, min);
+                            float center_speed = SpeedCenter(i, min);
+                            float mass_rotation = RotationSquare(i, min);
+                            float center_rotation = RotationCenter(i, min);
+                            if (massS == 0)
+                            {
+                                massS = mass_speed;
+                                centerS = center_speed;
+                            }
+                            else
+                            {
+                                if (centerS < center_speed)
+                                    centerS += (center_speed - centerS) * (mass_speed / (mass_speed * massS));
+                                else
+                                    centerS -= (centerS - center_speed) * (mass_speed / (mass_speed * massS));
+                                massS += mass_speed;
+                            }
+                            if (massR == 0)
+                            {
+                                massR = mass_rotation;
+                                centerR = center_rotation;
+                            }
+                            else
+                            {
+                                if (centerR < center_speed)
+                                    centerR += (center_speed - centerR) * (mass_speed / (mass_speed * massR));
+                                else
+                                    centerR -= (centerR - center_speed) * (mass_speed / (mass_speed * massR));
+                                massS += mass_speed;
+                            }
+                        }
                     }
-    }
-    
 
+    }
 }
+    

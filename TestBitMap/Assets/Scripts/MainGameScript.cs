@@ -48,7 +48,7 @@ public class MainGameScript : MonoBehaviour {
         Vector3 PointStart = new Vector3(0, 0, 0);
         // Texture2D tex = new Texture2D((int)img.rect.width, (int)img.rect.height);
         Sprite sprite;
-        Debug.Log(imgg.mainTexture);
+        //Debug.Log(imgg.mainTexture);
         Texture2D newText = (Texture2D)imgg.mainTexture;
         //Texture2D newText = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
         //SetTextureImporterFormat(newText, true);

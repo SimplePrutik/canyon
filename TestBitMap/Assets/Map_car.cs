@@ -34,7 +34,7 @@ public class Map_car : MonoBehaviour {
 			var pr2 = GameObject.Find("Prutik2");
 			var heading = this.transform.position - pr2.transform.position;
             float Count2 = heading.sqrMagnitude;
-            es.m_s = Count2;
+            es.middle_s = Count2;
 		}
 
 		if (other.name == "Prutik3") {

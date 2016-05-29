@@ -42,11 +42,11 @@ public class ExpertSystem : MonoBehaviour {
     {
         switch (i)
         {
-            case 0:
+            case -1:
                 return SpeedLeftSquare(k);
-            case 1:
+            case 0:
                 return SpeedMiddleSquare(k);
-            case 2:
+            case 1:
                 return SpeedRightSquare(k);
             default:
                 return -1;
@@ -82,17 +82,18 @@ public class ExpertSystem : MonoBehaviour {
     {
         switch (i)
         {
-            case 0:
+            case -1:
                 return RotateLeftSquare(k);
-            case 1:
+            case 0:
                 return RotateMiddleSquare(k);
-            case 2:
+            case 1:
                 return RotateRightSquare(k);
             default:
                 return -1;
 
         }
     }
+
     private float RotateLeftSquare(float k)
     {
         Rotation rot = GetComponent<Rotation>();
@@ -121,11 +122,11 @@ public class ExpertSystem : MonoBehaviour {
     {
         switch (i)
         {
-            case 0:
+            case -1:
                 return SpeedLeftCenter(k);
-            case 1:
+            case 0:
                 return SpeedMiddleCenter(k);
-            case 2:
+            case 1:
                 return SpeedRightCenter(k);
             default:
                 return -1;
@@ -167,11 +168,11 @@ public class ExpertSystem : MonoBehaviour {
     {
         switch (i)
         {
-            case 0:
+            case -1:
                 return RotateLeftCenter(k);
-            case 1:
+            case 0:
                 return RotateMiddleCenter(k);
-            case 2:
+            case 1:
                 return RotateRightCenter(k);
             default:
                 return -1;
@@ -226,48 +227,128 @@ public class ExpertSystem : MonoBehaviour {
     void Update()
     {
         Speed speed = GetComponent<Speed>();
-        List<Function> speed_list = new List<Function>(3);
-        speed_list[0] = new Function(speed.z1, speed.z2, speed.z3, speed.z4);
-        speed_list[1] = new Function(speed.o1, speed.o2, speed.o3, speed.o4);
-        speed_list[2] = new Function(speed.t1, speed.t2, speed.t3, speed.t4);
+        List<Function> speed_list = new List<Function>();
+        speed_list.Add(new Function(speed.z1, speed.z2, speed.z3, speed.z4));
+        speed_list.Add(new Function(speed.o1, speed.o2, speed.o3, speed.o4));
+
 
         Left_Sensor ls = GetComponent<Left_Sensor>();
-        List<Function> ls_list = new List<Function>(3);
-        ls_list[0] = new Function(ls.z1, ls.z2, ls.z3, ls.z4);
-        ls_list[1] = new Function(ls.o1, ls.o2, ls.o3, ls.o4);
-        ls_list[2] = new Function(ls.t1, ls.t2, ls.t3, ls.t4);
+        List<Function> ls_list = new List<Function>(2);
+        ls_list.Add(new Function(ls.z1, ls.z2, ls.z3, ls.z4));
+        ls_list.Add(new Function(ls.o1, ls.o2, ls.o3, ls.o4));
 
         Middle_Sensor ms = GetComponent<Middle_Sensor>();
-        List<Function> ms_list = new List<Function>(3);
-        ms_list[0] = new Function(ms.z1, ms.z2, ms.z3, ms.z4);
-        ms_list[1] = new Function(ms.o1, ms.o2, ms.o3, ms.o4);
-        ms_list[2] = new Function(ms.t1, ms.t2, ms.t3, ms.t4);
+        List<Function> ms_list = new List<Function>(2);
+        ms_list.Add(new Function(ms.z1, ms.z2, ms.z3, ms.z4));
+        ms_list.Add(new Function(ms.o1, ms.o2, ms.o3, ms.o4));
 
         Right_Sensor rs = GetComponent<Right_Sensor>();
-        List<Function> rs_list = new List<Function>(3);
-        rs_list[0] = new Function(rs.z1, rs.z2, rs.z3, rs.z4);
-        rs_list[1] = new Function(rs.o1, rs.o2, rs.o3, rs.o4);
-        rs_list[2] = new Function(rs.t1, rs.t2, rs.t3, rs.t4);
+        List<Function> rs_list = new List<Function>(2);
+        rs_list.Add(new Function(rs.z1, rs.z2, rs.z3, rs.z4));
+        rs_list.Add(new Function(rs.o1, rs.o2, rs.o3, rs.o4));
 
         float massS = 0, centerS = 0, massR = 0, centerR = 0;
+        
 
-        for (int i = 0; i < 3; ++i)
-            for (int j = 0; j < 3; ++j)
-                for (int k = 0; k < 3; ++k)
-                    for (int l = 0; l < 3; ++l)
+        for (int i = 0; i < 2; ++i)
+            for (int j = 0; j < 2; ++j)
+                for (int k = 0; k < 2; ++k)
+                    for (int l = 0; l < 2; ++l)
                     {
-                        List<float> li = new List<float>(4);
-                        li[0] = speed_list[i].ComputeFunc(sp);
-                        li[1] = ls_list[j].ComputeFunc(l_s);
-                        li[2] = ms_list[k].ComputeFunc(m_s);
-                        li[3] = rs_list[l].ComputeFunc(r_s);
+                        int rot = 0, a = 0;
+
+                        if (i == 0 && j == 0 && k == 0 && l == 0)
+                        {
+                            rot = 1;
+                            a = 1;
+                        }
+                        if (i == 0 && j == 0 && k == 0 && l == 1)
+                        {
+                            rot = 0;
+                            a = 1;
+                        }
+                        if (i == 0 && j == 0 && k == 1 && l == 0)
+                        {
+                            rot = -1;
+                            a = 0;
+                        }
+                        if (i == 0 && j == 0 && k == 1 && l == 1)
+                        {
+                            rot = -1;
+                            a = 0;
+                        }
+                        if (i == 0 && j == 1 && k == 0 && l == 0)
+                        {
+                            rot = -1;
+                            a = 0;
+                        }
+                        if (i == 0 && j == 1 && k == 0 && l == 1)
+                        {
+                            rot = 0;
+                            a = 0;
+                        }
+                        if (i == 0 && j == 1 && k == 1 && l == 0)
+                        {
+                            rot = -1;
+                            a = 0;
+                        }
+                        if (i == 0 && j == 1 && k == 1 && l == 1)
+                        {
+                            rot = -1;
+                            a = 0;
+                        }
+                        if (i == 1 && j == 0 && k == 0 && l == 0)
+                        {
+                            rot = 1;
+                            a = 0;
+                        }
+                        if (i == 1 && j == 0 && k == 0 && l == 1)
+                        {
+                            rot = 0;
+                            a = 0;
+                        }
+                        if (i == 1 && j == 0 && k == 1 && l == 0)
+                        {
+                            rot = -1;
+                            a = 1;
+                        }
+                        if (i == 1 && j == 0 && k == 1 && l == 1)
+                        {
+                            rot = -1;
+                            a = -1;
+                        }
+                        if (i == 1 && j == 1 && k == 0 && l == 0)
+                        {
+                            rot = -1;
+                            a = -1;
+                        }
+                        if (i == 1 && j == 1 && k == 0 && l == 1)
+                        {
+                            rot = 0;
+                            a = 0;
+                        }
+                        if (i == 1 && j == 1 && k == 1 && l == 0)
+                        {
+                            rot = -1;
+                            a = -1;
+                        }
+                        if (i == 1 && j == 1 && k == 1 && l == 1)
+                        {
+                            rot = -1;
+                            a = -1;
+                        }
+                        List<float> li = new List<float>();
+                        li.Add(speed_list[i].ComputeFunc(sp));
+                        li.Add(ls_list[j].ComputeFunc(l_s));
+                        li.Add(ms_list[k].ComputeFunc(m_s));
+                        li.Add(rs_list[l].ComputeFunc(r_s));
                         float min = Min(li);
                         if (min != 0)
                         {
-                            float mass_speed = SpeedSquare(i, min);
-                            float center_speed = SpeedCenter(i, min);
-                            float mass_rotation = RotationSquare(i, min);
-                            float center_rotation = RotationCenter(i, min);
+                            float mass_speed = SpeedSquare(a, min);
+                            float center_speed = SpeedCenter(a, min);
+                            float mass_rotation = RotationSquare(rot, min);
+                            float center_rotation = RotationCenter(rot, min);
                             if (massS == 0)
                             {
                                 massS = mass_speed;
@@ -296,8 +377,10 @@ public class ExpertSystem : MonoBehaviour {
                             }
                         }
                     }
-        this.transform.position += this.transform.forward + this.transform.forward * centerS;
-        this.transform.Rotate(new Vector3(0, 0, centerR));
+
+        Debug.Log(centerS);
+        //this.transform.position += this.transform. + this.transform. * 5;
+        //this.transform.Rotate(new Vector3(0, 0, centerR));
     }
 }
     

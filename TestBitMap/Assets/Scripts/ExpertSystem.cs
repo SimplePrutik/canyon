@@ -264,6 +264,7 @@ public class ExpertSystem : MonoBehaviour {
                 for (int k = 0; k < 3; ++k)
                     for (int l = 0; l < 3; ++l)
                     {
+                        ReadMatrix rm = GetComponent<ReadMatrix>();
                         int rot = 0, a = 0;
                         
                         List<float> li = new List<float>();
@@ -306,10 +307,9 @@ public class ExpertSystem : MonoBehaviour {
                             }
                         }
                     }
-
-        Debug.Log(sp);
+        
         transform.position += Forward() * sp;
-        transform.Rotate(new Vector3(0, 0, centerR));
+        transform.Rotate(new Vector3(0, 0, 1));
     }
 }
     

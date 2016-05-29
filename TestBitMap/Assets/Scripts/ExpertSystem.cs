@@ -224,119 +224,48 @@ public class ExpertSystem : MonoBehaviour {
         return min;
     }
 
+    private Vector3 Forward()
+    {
+        return new Vector3(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), 0);
+    }
+
     void Update()
     {
         Speed speed = GetComponent<Speed>();
         List<Function> speed_list = new List<Function>();
         speed_list.Add(new Function(speed.z1, speed.z2, speed.z3, speed.z4));
         speed_list.Add(new Function(speed.o1, speed.o2, speed.o3, speed.o4));
+        speed_list.Add(new Function(speed.t1, speed.t2, speed.t3, speed.t4));
 
 
         Left_Sensor ls = GetComponent<Left_Sensor>();
-        List<Function> ls_list = new List<Function>(2);
+        List<Function> ls_list = new List<Function>();
         ls_list.Add(new Function(ls.z1, ls.z2, ls.z3, ls.z4));
         ls_list.Add(new Function(ls.o1, ls.o2, ls.o3, ls.o4));
+        ls_list.Add(new Function(ls.t1, ls.t2, ls.t3, ls.t4));
 
         Middle_Sensor ms = GetComponent<Middle_Sensor>();
-        List<Function> ms_list = new List<Function>(2);
+        List<Function> ms_list = new List<Function>();
         ms_list.Add(new Function(ms.z1, ms.z2, ms.z3, ms.z4));
         ms_list.Add(new Function(ms.o1, ms.o2, ms.o3, ms.o4));
+        ms_list.Add(new Function(ms.t1, ms.t2, ms.t3, ms.t4));
 
         Right_Sensor rs = GetComponent<Right_Sensor>();
-        List<Function> rs_list = new List<Function>(2);
+        List<Function> rs_list = new List<Function>();
         rs_list.Add(new Function(rs.z1, rs.z2, rs.z3, rs.z4));
         rs_list.Add(new Function(rs.o1, rs.o2, rs.o3, rs.o4));
+        rs_list.Add(new Function(rs.t1, rs.t2, rs.t3, rs.t4));
 
         float massS = 0, centerS = 0, massR = 0, centerR = 0;
         
 
-        for (int i = 0; i < 2; ++i)
-            for (int j = 0; j < 2; ++j)
-                for (int k = 0; k < 2; ++k)
-                    for (int l = 0; l < 2; ++l)
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                for (int k = 0; k < 3; ++k)
+                    for (int l = 0; l < 3; ++l)
                     {
                         int rot = 0, a = 0;
-
-                        if (i == 0 && j == 0 && k == 0 && l == 0)
-                        {
-                            rot = 1;
-                            a = 1;
-                        }
-                        if (i == 0 && j == 0 && k == 0 && l == 1)
-                        {
-                            rot = 0;
-                            a = 1;
-                        }
-                        if (i == 0 && j == 0 && k == 1 && l == 0)
-                        {
-                            rot = -1;
-                            a = 0;
-                        }
-                        if (i == 0 && j == 0 && k == 1 && l == 1)
-                        {
-                            rot = -1;
-                            a = 0;
-                        }
-                        if (i == 0 && j == 1 && k == 0 && l == 0)
-                        {
-                            rot = -1;
-                            a = 0;
-                        }
-                        if (i == 0 && j == 1 && k == 0 && l == 1)
-                        {
-                            rot = 0;
-                            a = 0;
-                        }
-                        if (i == 0 && j == 1 && k == 1 && l == 0)
-                        {
-                            rot = -1;
-                            a = 0;
-                        }
-                        if (i == 0 && j == 1 && k == 1 && l == 1)
-                        {
-                            rot = -1;
-                            a = 0;
-                        }
-                        if (i == 1 && j == 0 && k == 0 && l == 0)
-                        {
-                            rot = 1;
-                            a = 0;
-                        }
-                        if (i == 1 && j == 0 && k == 0 && l == 1)
-                        {
-                            rot = 0;
-                            a = 0;
-                        }
-                        if (i == 1 && j == 0 && k == 1 && l == 0)
-                        {
-                            rot = -1;
-                            a = 1;
-                        }
-                        if (i == 1 && j == 0 && k == 1 && l == 1)
-                        {
-                            rot = -1;
-                            a = -1;
-                        }
-                        if (i == 1 && j == 1 && k == 0 && l == 0)
-                        {
-                            rot = -1;
-                            a = -1;
-                        }
-                        if (i == 1 && j == 1 && k == 0 && l == 1)
-                        {
-                            rot = 0;
-                            a = 0;
-                        }
-                        if (i == 1 && j == 1 && k == 1 && l == 0)
-                        {
-                            rot = -1;
-                            a = -1;
-                        }
-                        if (i == 1 && j == 1 && k == 1 && l == 1)
-                        {
-                            rot = -1;
-                            a = -1;
-                        }
+                        
                         List<float> li = new List<float>();
                         li.Add(speed_list[i].ComputeFunc(sp));
                         li.Add(ls_list[j].ComputeFunc(l_s));
@@ -378,9 +307,9 @@ public class ExpertSystem : MonoBehaviour {
                         }
                     }
 
-        Debug.Log(centerS);
-        //this.transform.position += this.transform. + this.transform. * 5;
-        //this.transform.Rotate(new Vector3(0, 0, centerR));
+        Debug.Log(sp);
+        transform.position += Forward() * sp;
+        transform.Rotate(new Vector3(0, 0, centerR));
     }
 }
     

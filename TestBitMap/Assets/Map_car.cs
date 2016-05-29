@@ -13,10 +13,15 @@ public class Map_car : MonoBehaviour {
 	}
 		
 	void OnTriggerEnter(Collider other){
-		if (other.name == "Prutik1") {
+
+        ExpertSystem es = GameObject.Find("Car(Clone)").GetComponent<ExpertSystem>();
+        
+
+        if (other.name == "Prutik1") {
 			var pr1 = GameObject.Find("Prutik1");
 			var heading = this.transform.position - pr1.transform.position;
-			int Count1 = heading.sqrMagnitude;
+			float Count1 = heading.sqrMagnitude;
+            es.l_s = Count1;
 			//int x = this.transform.position.x;
 			//int y = this.transform.position.y;
 			//int z = this.transform.position.z;
@@ -28,14 +33,16 @@ public class Map_car : MonoBehaviour {
 		if (other.name == "Prutik2") {
 			var pr2 = GameObject.Find("Prutik2");
 			var heading = this.transform.position - pr2.transform.position;
-			int Count2 = heading.sqrMagnitude;
+            float Count2 = heading.sqrMagnitude;
+            es.m_s = Count2;
 		}
 
 		if (other.name == "Prutik3") {
 			var pr3 = GameObject.Find("Prutik1");
 			var heading = this.transform.position - pr3.transform.position;
-			int Count3 = heading.sqrMagnitude;
-		}
+            float Count3 = heading.sqrMagnitude;
+            es.r_s = Count3;
+        }
 	}
 		
 	// Update is called once per frame

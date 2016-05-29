@@ -54,9 +54,9 @@ public class MainGameScript : MonoBehaviour {
         
         
         //Color[] newColors = sprite.texture.GetPixels((int)sprite.textureRect.x,
-        //                                             (int)sprite.textureRect.y,
-        //                                             (int)sprite.textureRect.width,
-        //                                             (int)sprite.textureRect.height);
+        //                                            (int)sprite.textureRect.y,
+        //                                            (int)sprite.textureRect.width,
+        //                                            (int)sprite.textureRect.height);
         //newText.SetPixels(newColors);
         //newText.Apply();
         //Debug.Log(newText.width);

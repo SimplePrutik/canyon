@@ -14,6 +14,7 @@ public class MainGameScript : MonoBehaviour {
     GameObject[,] MapArea = new GameObject[maxWidth, maxHeight];
     int P = 150;
 
+
     public static void SetTextureImporterFormat(Texture2D texture, bool isReadable)
     {
         if (null == texture) return;

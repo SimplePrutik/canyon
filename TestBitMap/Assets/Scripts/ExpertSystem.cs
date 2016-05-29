@@ -26,7 +26,9 @@ public class ExpertSystem : MonoBehaviour {
 
         public float ComputeFunc(float x)
         {
-            if (x >= bottom_right || x <= bottom_left)
+            if (x == 0)
+                return 1;
+            if (x > bottom_right || x < bottom_left)
                 return 0;
             if (x <= top_right && x >= top_left)
                 return 1;
@@ -265,8 +267,9 @@ public class ExpertSystem : MonoBehaviour {
                     for (int l = 0; l < 3; ++l)
                     {
                         ReadMatrix rm = GetComponent<ReadMatrix>();
-                        int rot = 0, a = 0;
-                        
+                        int rot = rm.rules[i][j][k][l].Value;
+                        int a = rm.rules[i][j][k][l].Key;
+
                         List<float> li = new List<float>();
                         li.Add(speed_list[i].ComputeFunc(sp));
                         li.Add(ls_list[j].ComputeFunc(l_s));
@@ -275,6 +278,8 @@ public class ExpertSystem : MonoBehaviour {
                         float min = Min(li);
                         if (min != 0)
                         {
+
+                            Debug.Log(rot);
                             float mass_speed = SpeedSquare(a, min);
                             float center_speed = SpeedCenter(a, min);
                             float mass_rotation = RotationSquare(rot, min);
@@ -307,9 +312,11 @@ public class ExpertSystem : MonoBehaviour {
                             }
                         }
                     }
-        
+
+        //Debug.Log(centerS);
+        sp += centerS;
         transform.position += Forward() * sp;
-        transform.Rotate(new Vector3(0, 0, 1));
+        transform.Rotate(new Vector3(0, 0, centerR));
     }
 }
     

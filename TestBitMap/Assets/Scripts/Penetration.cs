@@ -8,6 +8,7 @@ public class Penetration : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         for (int i = 0; i < sensors.Count; ++i)
+        {
             if (sensors[i].GetComponent<Feeling>().feel)
             {
                 switch (name)
@@ -25,8 +26,28 @@ public class Penetration : MonoBehaviour {
                         Debug.Log("Какая-то хуйня");
                         break;
                 }
-                continue;
+                return;
             }
+            else
+            {
+
+                switch (name)
+                {
+                    case "Prutik1":
+                        GetComponentInParent<ExpertSystem>().l_s = 20;
+                        break;
+                    case "Prutik2":
+                        GetComponentInParent<ExpertSystem>().middle_s = 20;
+                        break;
+                    case "Prutik3":
+                        GetComponentInParent<ExpertSystem>().r_s = 20;
+                        break;
+                    default:
+                        Debug.Log("Какая-то хуйня");
+                        break;
+                }
+            }
+        }
                 
 
 	}

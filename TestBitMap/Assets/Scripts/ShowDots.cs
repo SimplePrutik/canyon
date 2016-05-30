@@ -45,8 +45,7 @@ public class ShowDots : MonoBehaviour {
             SY.text = "100";
         }
 
-        transform.position = new Vector3(119 + (float)(527.0 / 180.0) * x, 202 + (float)(285.0 / 100.0) * y, 0);
-        //transform.position = new Vector3(119 + x, 202 +  y, 0);
+        transform.position = new Vector3(151 + (float)(527.0 / 180.0) * x, 201 + (float)(285.0 / 100.0) * y, 0);
     }
 
 

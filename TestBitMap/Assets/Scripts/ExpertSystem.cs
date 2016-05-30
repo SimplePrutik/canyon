@@ -259,6 +259,12 @@ public class ExpertSystem : MonoBehaviour {
         rs_list.Add(new Function(rs.t1, rs.t2, rs.t3, rs.t4));
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.name == "MapQuit(Clone)")
+            Application.Quit();
+    }
+
     void Update()
     {
         
@@ -286,16 +292,16 @@ public class ExpertSystem : MonoBehaviour {
                         float min = Min(li);
                         if (min != 0)
                         {
-                            Debug.Log(i.ToString() + j.ToString() + k.ToString() + l.ToString());
-                            Debug.Log("Minimunm" + min.ToString());
-                            Debug.Log(speed_list[i].ComputeFunc(sp).ToString() + " " + ls_list[j].ComputeFunc(l_s).ToString() + " " + ms_list[k].ComputeFunc(middle_s).ToString() + " " + rs_list[l].ComputeFunc(r_s).ToString());
-                            Debug.Log("Acceleration " + a.ToString() + " Rotation " + rot.ToString());
+                            //Debug.Log(i.ToString() + j.ToString() + k.ToString() + l.ToString());
+                            //Debug.Log("Minimum" + min.ToString());
+                            //Debug.Log(speed_list[i].ComputeFunc(sp).ToString() + " " + ls_list[j].ComputeFunc(l_s).ToString() + " " + ms_list[k].ComputeFunc(middle_s).ToString() + " " + rs_list[l].ComputeFunc(r_s).ToString());
+                            //Debug.Log("Acceleration " + a.ToString() + " Rotation " + rot.ToString());
                             float mass_speed = SpeedSquare(a, min);
                             float center_speed = SpeedCenter(a, min);
                             float mass_rotation = RotationSquare(rot, min);
                             float center_rotation = RotationCenter(rot, min);
-                            Debug.Log("Square" + mass_speed.ToString() + " Center" + center_speed.ToString());
-                            Debug.Log("Square" + mass_rotation.ToString() + " Center" + center_rotation.ToString());
+                            //Debug.Log("Square" + mass_speed.ToString() + " Center" + center_speed.ToString());
+                            //Debug.Log("Square" + mass_rotation.ToString() + " Center" + center_rotation.ToString());
                             if (massS == 0)
                             {
                                 massS = mass_speed;
@@ -325,8 +331,10 @@ public class ExpertSystem : MonoBehaviour {
                         }
                     }
 
-        Debug.Log("ASFSGASFGSDFSADGASDGASDFASDFASDGSdgasdgasdfasdfasFasdfasdfasdgfsdfasdfasdfasdfasdfafsdfsdfsdfsdfs");
+        //Debug.Log("ASFSGASFGSDFSADGASDGASDFASDFASDGSdgasdgasdfasdfasFasdfasdfasdgfsdfasdfasdfasdfasdfafsdfsdfsdfsdfs");
         sp += centerS;
+        if (sp < 0.05f)
+            sp = 0.05f;
         transform.position += Forward() * sp;
         Debug.Log("Speed = " + sp.ToString() + " Acceleration = " + centerS.ToString() + " Rotation = " + centerR.ToString());
         transform.Rotate(new Vector3(0, 0, -centerR));

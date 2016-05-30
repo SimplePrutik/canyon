@@ -7,13 +7,13 @@ public class Feeling : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.name == "Map(Clone)")
+        if (other.gameObject.name == "Map(Clone)")
             feel = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name == "Map(Clone)")
+        if (other.gameObject.name == "Map(Clone)")
             feel = true;
     }
 

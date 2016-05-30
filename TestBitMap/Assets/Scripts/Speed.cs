@@ -21,4 +21,33 @@ public class Speed : MonoBehaviour {
     public float t3;
     public float t4;
 
+    public UnityEngine.UI.Dropdown Input;
+
+
+    void Start()
+    {
+        float val = 0;
+        if (Input.value == 0)
+            val = 1;
+        if (Input.value == 1)
+            val = 1.5f;
+        else
+            val = 1.7f;
+
+        z1 *= val;
+        z2 *= val;
+        z3 *= val;
+        z4 *= val;
+
+        o1 *= val;
+        o2 *= val;
+        o3 *= val;
+        o4 *= val;
+
+        t1 *= val;
+        t2 *= val;
+        t3 *= val;
+        t4 *= val;
+    }
+
 }
